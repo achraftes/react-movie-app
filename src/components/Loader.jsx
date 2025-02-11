@@ -1,6 +1,6 @@
 const Loader = () => {
     return (
-      <>
+      <div>
         <button 
           disabled
           type="button"
@@ -25,7 +25,7 @@ const Loader = () => {
           </svg>
           Loading...
         </button>
-      </>
+      </div>
     );
   };
   
