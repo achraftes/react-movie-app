@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useDebounce } from "react-use";
 import Search from "./components/Search";
 import Loader from "./components/Loader";
 import MovieCard from "./components/MovieCard";
@@ -20,6 +21,9 @@ function App() {
   const [errorMessage,  setErrorMessage] = useState('');
   const [movieList, setMovieList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+
+  useDebounce(() => setDebouncedSearch(searchT), 500, [searchT]);
   
 
   const fetchMovies = async (query = '') => {
@@ -53,8 +57,8 @@ function App() {
   };
 
   useEffect(() => {
-    fetchMovies(searchT);
-  }, [searchT]);
+    fetchMovies(debouncedSearch);
+  }, [debouncedSearch]);
 
   return (
     <>
